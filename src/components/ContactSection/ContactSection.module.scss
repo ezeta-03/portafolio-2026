@@ -1,0 +1,221 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.section {
+  padding: $section-padding;
+  background: $bg-light;
+
+  @media (max-width: $tablet) {
+    padding: $section-padding-mobile;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+
+  @media (max-width: $desktop) {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.formSide {
+  h2 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: $text-dark;
+    margin-bottom: 12px;
+  }
+}
+
+.sub {
+  font-size: 1.0625rem;
+  color: $gray-text;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text-dark;
+  }
+
+  input, textarea {
+    padding: 12px 16px;
+    border: 1.5px solid $gray-soft;
+    border-radius: $radius-sm;
+    font-family: $font-body;
+    font-size: 0.9375rem;
+    color: $text-dark;
+    background: $white;
+    transition: border-color $transition;
+    resize: vertical;
+
+    &::placeholder {
+      color: color.adjust($gray-text, $lightness: 15%);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $accent;
+    }
+  }
+
+  .btn {
+    align-self: flex-start;
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: $mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.success {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  background: rgba($accent, 0.08);
+  border: 1px solid rgba($accent, 0.3);
+  border-radius: $radius-md;
+
+  .successCheck {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba($accent, 0.15);
+    color: $accent;
+    flex-shrink: 0;
+  }
+
+  strong {
+    display: block;
+    font-size: 1.0625rem;
+    color: $primary;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: $gray-text;
+  }
+}
+
+.error {
+  font-size: 0.875rem;
+  color: #e55;
+}
+
+// Quote block (replaces banner photo)
+.contactQuote {
+  background: linear-gradient(135deg, $primary, $accent);
+  border-radius: $radius-md;
+  padding: 40px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  blockquote {
+    font-family: $font-headline;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: $white;
+    line-height: 1.4;
+  }
+
+  cite {
+    font-size: 0.8125rem;
+    color: rgba($white, 0.6);
+    font-style: normal;
+  }
+}
+
+.contactQuoteIcon {
+  color: rgba($white, 0.25);
+}
+
+// Contact side
+.contactSide {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.contactInfo {
+  background: $dark-section;
+  border-radius: $radius-md;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h3 {
+    font-family: $font-body;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: 4px;
+  }
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    strong {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba($white, 0.5);
+    }
+
+    span {
+      font-size: 1rem;
+      color: $white;
+    }
+  }
+}
+
+.contactIcon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: $accent;
+  padding-top: 2px;
+}
+
+.waBtn {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.0625rem;
+  padding: 16px;
+}

@@ -1,0 +1,124 @@
+@use '../../styles/variables' as *;
+
+.section {
+  padding: $section-padding;
+  background: $bg-light;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(#1D9E75, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(#0F6E56, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  @media (max-width: $tablet) {
+    padding: $section-padding-mobile;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+
+  .section-subtitle {
+    margin: 16px auto 0;
+  }
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+  margin-bottom: 56px;
+
+  @media (max-width: $desktop) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: $tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+  position: relative;
+
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    right: -2px;
+    width: calc(100% - 56px);
+    height: 2px;
+    background: linear-gradient(to right, $accent, rgba($accent, 0.2));
+    z-index: 0;
+
+    @media (max-width: $desktop) {
+      display: none;
+    }
+  }
+}
+
+.stepNum {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: $primary;
+  color: $white;
+  font-family: $font-headline;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.connector {
+  display: none;
+}
+
+.stepContent {
+  h3 {
+    font-family: $font-body;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: $gray-text;
+    line-height: 1.6;
+  }
+}
+
+.closing {
+  text-align: center;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba($primary, 0.06), rgba($accent, 0.06));
+  border: 1px solid rgba($accent, 0.2);
+  border-radius: $radius-md;
+
+  p {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $primary;
+    font-family: $font-headline;
+  }
+}

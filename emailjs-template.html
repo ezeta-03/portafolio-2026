@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuevo mensaje desde Nexio</title>
+</head>
+<body style="margin:0;padding:0;background-color:#F8F7F3;font-family:'DM Sans',Arial,sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#F8F7F3;padding:40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+          <!-- HEADER -->
+          <tr>
+            <td style="background-color:#0F2E24;border-radius:12px 12px 0 0;padding:28px 40px;text-align:center;">
+              <p style="margin:0;font-size:26px;font-weight:700;color:#ffffff;letter-spacing:-0.5px;">
+                Nexio
+              </p>
+              <p style="margin:6px 0 0;font-size:12px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;">
+                Desarrollo de software a medida
+              </p>
+            </td>
+          </tr>
+
+          <!-- BODY -->
+          <tr>
+            <td style="background-color:#ffffff;padding:40px 40px 32px;border-left:1px solid #E8E6DF;border-right:1px solid #E8E6DF;">
+
+              <!-- Alert badge -->
+              <div style="display:inline-block;background-color:#e8f6f1;border:1px solid #1D9E75;border-radius:100px;padding:5px 14px;margin-bottom:24px;">
+                <span style="font-size:12px;font-weight:700;color:#0F6E56;text-transform:uppercase;letter-spacing:0.06em;">
+                  Nuevo lead desde el sitio web
+                </span>
+              </div>
+
+              <h2 style="margin:0 0 8px;font-size:22px;color:#0F0F0E;font-weight:700;">
+                Tienes un nuevo mensaje
+              </h2>
+              <p style="margin:0 0 28px;font-size:15px;color:#6B6B6B;line-height:1.6;">
+                Alguien completó el formulario de contacto en <strong>nexio.pe</strong>.
+                Aquí están los datos:
+              </p>
+
+              <!-- Data rows -->
+              <table width="100%" cellpadding="0" cellspacing="0"
+                     style="border:1px solid #E8E6DF;border-radius:8px;overflow:hidden;">
+
+                <tr style="background-color:#F8F7F3;">
+                  <td style="padding:14px 20px;font-size:11px;font-weight:700;color:#6B6B6B;
+                             text-transform:uppercase;letter-spacing:0.06em;width:140px;
+                             border-bottom:1px solid #E8E6DF;">
+                    Nombre
+                  </td>
+                  <td style="padding:14px 20px;font-size:15px;font-weight:600;color:#0F0F0E;
+                             border-bottom:1px solid #E8E6DF;">
+                    {{from_name}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="padding:14px 20px;font-size:11px;font-weight:700;color:#6B6B6B;
+                             text-transform:uppercase;letter-spacing:0.06em;
+                             border-bottom:1px solid #E8E6DF;background-color:#F8F7F3;">
+                    Institución
+                  </td>
+                  <td style="padding:14px 20px;font-size:15px;font-weight:600;color:#0F0F0E;
+                             border-bottom:1px solid #E8E6DF;">
+                    {{institution}}
+                  </td>
+                </tr>
+
+                <tr style="background-color:#F8F7F3;">
+                  <td style="padding:14px 20px;font-size:11px;font-weight:700;color:#6B6B6B;
+                             text-transform:uppercase;letter-spacing:0.06em;
+                             border-bottom:1px solid #E8E6DF;">
+                    WhatsApp
+                  </td>
+                  <td style="padding:14px 20px;font-size:15px;font-weight:600;color:#0F0F0E;
+                             border-bottom:1px solid #E8E6DF;">
+                    {{whatsapp}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="padding:14px 20px;font-size:11px;font-weight:700;color:#6B6B6B;
+                             text-transform:uppercase;letter-spacing:0.06em;
+                             vertical-align:top;background-color:#F8F7F3;">
+                    Mensaje
+                  </td>
+                  <td style="padding:14px 20px;font-size:15px;color:#0F0F0E;line-height:1.65;">
+                    {{message}}
+                  </td>
+                </tr>
+
+              </table>
+
+              <!-- CTA reply -->
+              <div style="margin-top:32px;text-align:center;">
+                <a href="https://wa.me/51979541272?text=Hola%20{{from_name}}%2C%20te%20contacto%20desde%20Nexio%20en%20respuesta%20a%20tu%20mensaje."
+                   style="display:inline-block;background-color:#25D366;color:#ffffff;
+                          font-size:15px;font-weight:700;text-decoration:none;
+                          padding:14px 32px;border-radius:8px;">
+                  Responder por WhatsApp
+                </a>
+              </div>
+
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="background-color:#1A1A1A;border-radius:0 0 12px 12px;
+                       padding:20px 40px;text-align:center;">
+              <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.35);">
+                © 2025 Nexio &nbsp;·&nbsp; Desarrollo de software a medida &nbsp;·&nbsp; Lima / Huancayo, Perú
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

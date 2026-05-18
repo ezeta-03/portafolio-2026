@@ -1,0 +1,270 @@
+@use '../../styles/variables' as *;
+
+.section {
+  padding: $section-padding;
+  background: $bg-light;
+
+  @media (max-width: $tablet) {
+    padding: $section-padding-mobile;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding-bottom: 32px;
+
+  @media (max-width: $desktop) {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.text {
+  h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: $text-dark;
+    margin-bottom: 20px;
+  }
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: 12px;
+}
+
+.desc {
+  font-size: 1.0625rem;
+  color: $gray-text;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.modules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.moduleChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: $white;
+  border: 1.5px solid $gray-soft;
+  border-radius: 100px;
+  padding: 7px 14px 7px 7px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $text-dark;
+  transition: border-color $transition, background $transition, transform $transition, box-shadow $transition;
+
+  &:hover {
+    border-color: $accent;
+    background: rgba($accent, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba($primary, 0.1);
+  }
+}
+
+.chipIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba($primary, 0.09);
+  color: $primary;
+  flex-shrink: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba($primary, 0.1), rgba($accent, 0.1));
+  border: 1px solid rgba($accent, 0.35);
+  color: $primary;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: $radius-sm;
+  margin-bottom: 28px;
+}
+
+// Standalone mockup container
+.visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -48px;
+    background: radial-gradient(ellipse at center, rgba($accent, 0.1), transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+// Dashboard mockup
+.mockup {
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.18);
+  border: 1px solid $gray-soft;
+  background: #fff;
+  font-size: 0.75rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.mockupBar {
+  background: #f0efeb;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid $gray-soft;
+
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $gray-soft;
+
+    &:nth-child(1) { background: #ff5f57; }
+    &:nth-child(2) { background: #febc2e; }
+    &:nth-child(3) { background: #28c840; }
+  }
+}
+
+.mockupUrl {
+  flex: 1;
+  text-align: center;
+  background: #fff;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: $gray-text;
+  font-size: 0.7rem;
+}
+
+.mockupBody {
+  display: flex;
+  height: 320px;
+}
+
+.mockupSidebar {
+  width: 100px;
+  background: $dark-section;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.mockupSideItem {
+  padding: 7px 8px;
+  color: rgba($white, 0.6);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  cursor: default;
+
+  &:first-child {
+    background: rgba($accent, 0.3);
+    color: $white;
+  }
+}
+
+.mockupMain {
+  flex: 1;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.mockupTitle {
+  font-weight: 700;
+  color: $text-dark;
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+.mockupCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.mockupCard {
+  background: $bg-light;
+  border-radius: 6px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  span:last-child {
+    font-size: 0.65rem;
+    color: $gray-text;
+  }
+}
+
+.mockupNum {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $primary;
+}
+
+.mockupChartLabel {
+  font-size: 0.7rem;
+  color: $gray-text;
+  margin-bottom: 8px;
+}
+
+.mockupChart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 70px;
+}
+
+@keyframes barGrow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+.mockupBar2 {
+  flex: 1;
+  background: linear-gradient(to top, $primary, $accent);
+  border-radius: 3px 3px 0 0;
+  opacity: 0.85;
+  transform-origin: bottom;
+  animation: barGrow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: paused;
+
+  &:nth-child(1) { animation-delay: 0.0s; }
+  &:nth-child(2) { animation-delay: 0.08s; }
+  &:nth-child(3) { animation-delay: 0.16s; }
+  &:nth-child(4) { animation-delay: 0.24s; }
+  &:nth-child(5) { animation-delay: 0.32s; }
+  &:nth-child(6) { animation-delay: 0.40s; }
+  &:nth-child(7) { animation-delay: 0.48s; }
+}
+
+:global(.scale-in.visible) .mockupBar2 {
+  animation-play-state: running;
+}

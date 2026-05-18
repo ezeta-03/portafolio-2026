@@ -1,0 +1,161 @@
+@use '../../styles/variables' as *;
+
+.section {
+  padding: $section-padding;
+  background: $bg-light;
+
+  @media (max-width: $tablet) {
+    padding: $section-padding-mobile;
+  }
+}
+
+// 2-column layout
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+
+  @media (max-width: $desktop) {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+// Left — photo column
+.photoCol {
+  position: relative;
+}
+
+.photoWrap {
+  position: relative;
+}
+
+.photo {
+  width: 100%;
+  border-radius: $radius-lg;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.18);
+}
+
+.photoAccent {
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  right: 20px;
+  bottom: 20px;
+  border: 2px solid rgba($accent, 0.3);
+  border-radius: $radius-lg;
+  z-index: -1;
+}
+
+.quoteCard {
+  position: absolute;
+  bottom: -24px;
+  right: -20px;
+  max-width: 280px;
+  background: $dark-section;
+  border-radius: $radius-md;
+  padding: 24px 22px 20px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+
+  @media (max-width: $desktop) {
+    position: static;
+    margin-top: 24px;
+    max-width: 100%;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.quoteIcon {
+  display: block;
+  margin-bottom: 10px;
+  color: $accent;
+}
+
+blockquote {
+  font-family: $font-headline;
+  font-style: italic;
+  font-size: 0.9375rem;
+  color: $white;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+cite {
+  font-size: 0.75rem;
+  color: rgba($white, 0.45);
+  font-style: normal;
+}
+
+// Right — blocks column
+.blocksCol {
+  padding-bottom: 28px;
+}
+
+.title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: $text-dark;
+  margin-bottom: 14px;
+}
+
+.sub {
+  font-size: 1rem;
+  color: $gray-text;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 460px;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.block {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 20px 24px;
+  border-radius: $radius-md;
+  border: 1px solid $gray-soft;
+  background: $white;
+  transition: border-color $transition, box-shadow $transition, transform $transition;
+
+  &:hover {
+    border-color: rgba($accent, 0.4);
+    box-shadow: 0 8px 28px rgba($primary, 0.08);
+    transform: translateX(4px);
+  }
+
+  h3 {
+    font-family: $font-body;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: $gray-text;
+    line-height: 1.6;
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-sm;
+  background: rgba($primary, 0.08);
+  color: $primary;
+  flex-shrink: 0;
+}

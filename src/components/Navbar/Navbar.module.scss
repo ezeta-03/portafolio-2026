@@ -1,0 +1,128 @@
+@use '../../styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  transition: background $transition, box-shadow $transition, padding $transition;
+
+  &.scrolled {
+    background: $dark-section;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    padding: 14px 0;
+  }
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  height: 36px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+
+  @media (max-width: $mobile) {
+    height: 30px;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-left: auto;
+}
+
+.link {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba($white, 0.85);
+  transition: color $transition;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+.cta {
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  flex-shrink: 0;
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  padding: 4px;
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: $white;
+    border-radius: 2px;
+    transition: transform $transition, opacity $transition;
+  }
+
+  &.burgerOpen {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+@media (max-width: $tablet) {
+  .burger {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $dark-section;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    z-index: 99;
+
+    &.open {
+      display: flex;
+    }
+  }
+
+  .link {
+    font-size: 1.5rem;
+  }
+
+  .cta {
+    font-size: 1rem;
+    padding: 14px 28px;
+  }
+
+  .burger {
+    z-index: 101;
+    position: relative;
+  }
+}

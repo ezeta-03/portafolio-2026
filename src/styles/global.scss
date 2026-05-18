@@ -1,0 +1,182 @@
+@use './variables' as *;
+@use 'sass:color';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  font-size: 16px;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-margin-top: 68px;
+}
+
+body {
+  font-family: $font-body;
+  background-color: $bg-light;
+  color: $text-dark;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: $font-body;
+}
+
+h1, h2, h3, h4 {
+  font-family: $font-headline;
+  line-height: 1.2;
+}
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $container-padding;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: $radius-sm;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all $transition;
+  cursor: pointer;
+  border: 2px solid transparent;
+  white-space: nowrap;
+
+  &--primary {
+    background: $accent;
+    color: $white;
+
+    &:hover {
+      background: $primary;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba($accent, 0.35);
+    }
+  }
+
+  &--secondary {
+    background: transparent;
+    color: $white;
+    border-color: rgba($white, 0.5);
+
+    &:hover {
+      border-color: $white;
+      background: rgba($white, 0.08);
+    }
+  }
+
+  &--whatsapp {
+    background: $whatsapp;
+    color: $white;
+
+    &:hover {
+      background: color.adjust($whatsapp, $lightness: -8%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba($whatsapp, 0.4);
+    }
+  }
+
+  &--outline-dark {
+    background: transparent;
+    color: $primary;
+    border-color: $primary;
+
+    &:hover {
+      background: $primary;
+      color: $white;
+    }
+  }
+}
+
+// Fade-in animation on scroll
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Scale-in for mockups
+.scale-in {
+  opacity: 0;
+  transform: scale(0.93) translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// Section titles
+.section-title {
+  font-family: $font-headline;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: $text-dark;
+  margin-bottom: 16px;
+
+  &--light {
+    color: $white;
+  }
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: $gray-text;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+
+  &--light {
+    color: rgba($white, 0.75);
+  }
+}

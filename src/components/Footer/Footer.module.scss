@@ -1,0 +1,67 @@
+@use '../../styles/variables' as *;
+
+.footer {
+  background: $dark-section;
+  padding: 40px 0 24px;
+  border-top: 1px solid rgba($white, 0.08);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba($white, 0.08);
+  margin-bottom: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  height: 32px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.link {
+  font-size: 0.875rem;
+  color: rgba($white, 0.6);
+  transition: color $transition;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+.right {
+  font-size: 0.875rem;
+  color: rgba($white, 0.5);
+}
+
+.bottom {
+  span {
+    font-size: 0.8125rem;
+    color: rgba($white, 0.35);
+  }
+}
+
+@media (max-width: $tablet) {
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

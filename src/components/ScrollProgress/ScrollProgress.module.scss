@@ -1,0 +1,91 @@
+@use '../../styles/variables' as *;
+
+// Top progress bar
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, $primary, $accent);
+  z-index: 200;
+  transition: width 0.12s linear;
+  border-radius: 0 2px 2px 0;
+  pointer-events: none;
+}
+
+// Right-side dot navigation
+.dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba($text-dark, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background  $transition,
+    transform   $transition,
+    box-shadow  $transition;
+
+  &:hover {
+    background: $accent;
+    transform: scale(1.4);
+
+    .tooltip {
+      opacity: 1;
+      transform: translateX(-8px);
+      pointer-events: auto;
+    }
+  }
+
+  &.dotActive {
+    background: $accent;
+    transform: scale(1.5);
+    box-shadow: 0 0 0 3px rgba($accent, 0.25);
+  }
+}
+
+.tooltip {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+  white-space: nowrap;
+  background: $dark-section;
+  color: $white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-body;
+  padding: 5px 10px;
+  border-radius: $radius-sm;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition, transform $transition;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-left-color: $dark-section;
+  }
+}
