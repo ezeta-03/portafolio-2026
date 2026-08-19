@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import useScrollReveal from '../../hooks/useScrollReveal'
 import { waLink } from '../../utils/whatsapp'
 import {
@@ -68,40 +69,264 @@ export default function ProductAcademico() {
   )
 }
 
-function DashboardMockup() {
+// ── Vistas del mockup ──────────────────────────────
+
+function ViewDashboard() {
   return (
-    <div className={styles.mockup}>
+    <>
+      <div className={styles.mockupCards}>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum}>248</span>
+          <span>Alumnos activos</span>
+        </div>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum} style={{ color: '#e05252' }}>12</span>
+          <span>Pagos pendientes</span>
+        </div>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum}>94%</span>
+          <span>Asistencia hoy</span>
+        </div>
+      </div>
+      <div className={styles.mockupChartLabel}>Recaudación mensual</div>
+      <div className={styles.mockupChart}>
+        {[60, 78, 55, 90, 72, 95, 68].map((h, i) => (
+          <div key={i} className={styles.mockupBarAnim} style={{ height: `${h}%` }} />
+        ))}
+      </div>
+    </>
+  )
+}
+
+function ViewAlumnos() {
+  const rows = [
+    { name: 'García, Ana M.', grade: '3°A', status: 'activo' },
+    { name: 'López, Pedro R.', grade: '1°B', status: 'activo' },
+    { name: 'Torres, María L.', grade: '5°A', status: 'deuda' },
+    { name: 'Ramos, Juan C.', grade: '2°C', status: 'activo' },
+    { name: 'Flores, Lucía P.', grade: '4°B', status: 'inactivo' },
+  ]
+  return (
+    <>
+      <div className={styles.viewSearch}>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Buscar alumno...
+      </div>
+      <div className={styles.viewTable}>
+        <div className={styles.viewHeader}>
+          <span>Nombre</span><span>Grado</span><span>Estado</span>
+        </div>
+        {rows.map(r => (
+          <div key={r.name} className={styles.viewRow}>
+            <span>{r.name}</span>
+            <span>{r.grade}</span>
+            <span className={`${styles.viewBadge} ${styles[r.status]}`}>{r.status}</span>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+
+function ViewMatricula() {
+  const grades = [
+    { name: '1er grado', done: 42, total: 45 },
+    { name: '2do grado', done: 38, total: 40 },
+    { name: '3er grado', done: 31, total: 42 },
+    { name: '4to grado', done: 36, total: 38 },
+    { name: '5to grado', done: 43, total: 45 },
+  ]
+  return (
+    <>
+      <div className={styles.mockupCards}>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum}>190</span>
+          <span>Matriculados</span>
+        </div>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum} style={{ color: '#e05252' }}>20</span>
+          <span>Pendientes</span>
+        </div>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum}>210</span>
+          <span>Total cupos</span>
+        </div>
+      </div>
+      <div className={styles.viewGrades}>
+        {grades.map(g => (
+          <div key={g.name} className={styles.viewGradeRow}>
+            <span className={styles.viewGradeName}>{g.name}</span>
+            <div className={styles.viewPbarBg}>
+              <div
+                className={styles.viewPbarFill}
+                style={{ width: `${Math.round((g.done / g.total) * 100)}%` }}
+              />
+            </div>
+            <span className={styles.viewGradeCount}>{g.done}/{g.total}</span>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+
+function ViewNotas() {
+  const subjects = [
+    { name: 'Matemática',    t: [14, 16, 15], avg: 15 },
+    { name: 'Comunicación',  t: [18, 17, 19], avg: 18 },
+    { name: 'Ciencias',      t: [12, 14, 13], avg: 13 },
+    { name: 'Historia',      t: [16, 15, 17], avg: 16 },
+    { name: 'Arte',          t: [19, 18, 20], avg: 19 },
+  ]
+  const color = n => n >= 14 ? '#1E3A8A' : '#e05252'
+  return (
+    <div className={styles.viewTable}>
+      <div className={`${styles.viewHeader} ${styles.viewHeaderNotas}`}>
+        <span>Curso</span><span>T1</span><span>T2</span><span>T3</span><span>Prom</span>
+      </div>
+      {subjects.map(s => (
+        <div key={s.name} className={`${styles.viewRow} ${styles.viewRowNotas}`}>
+          <span>{s.name}</span>
+          {s.t.map((sc, i) => <span key={i} style={{ color: color(sc) }}>{sc}</span>)}
+          <span style={{ fontWeight: 700, color: color(s.avg) }}>{s.avg}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ViewAsistencia() {
+  const days = [
+    { day: 'Lun', pct: 97 }, { day: 'Mar', pct: 92 },
+    { day: 'Mié', pct: 88 }, { day: 'Jue', pct: 95 }, { day: 'Vie', pct: 91 },
+  ]
+  return (
+    <>
+      <div className={styles.mockupCards}>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum}>93%</span>
+          <span>Promedio semana</span>
+        </div>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum} style={{ color: '#e05252' }}>8</span>
+          <span>Ausencias hoy</span>
+        </div>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum} style={{ color: '#d97706' }}>3</span>
+          <span>Tardanzas hoy</span>
+        </div>
+      </div>
+      <div className={styles.mockupChartLabel}>Asistencia por día</div>
+      <div className={styles.viewDayBars}>
+        {days.map((d, i) => (
+          <div key={i} className={styles.viewDayCol}>
+            <div
+              className={styles.mockupBarAnim}
+              style={{ height: `${d.pct - 45}%`, width: '100%', animationDelay: `${i * 0.07}s` }}
+            />
+            <span className={styles.viewDayLabel}>{d.day}</span>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+
+function ViewCobranza() {
+  const rows = [
+    { name: 'García, Ana',   amount: 'S/350', date: '15/05', status: 'pagado' },
+    { name: 'Torres, M.',    amount: 'S/350', date: '—',     status: 'deuda' },
+    { name: 'López, P.',     amount: 'S/350', date: '14/05', status: 'pagado' },
+    { name: 'Ramos, J.',     amount: 'S/175', date: '—',     status: 'parcial' },
+    { name: 'Flores, L.',    amount: 'S/350', date: '12/05', status: 'pagado' },
+  ]
+  return (
+    <>
+      <div className={styles.mockupCards}>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum} style={{ fontSize: '0.85rem' }}>S/62,300</span>
+          <span>Recaudado este mes</span>
+        </div>
+        <div className={styles.mockupCard}>
+          <span className={styles.mockupNum} style={{ color: '#e05252', fontSize: '0.85rem' }}>S/4,200</span>
+          <span>Pendiente de cobro</span>
+        </div>
+      </div>
+      <div className={styles.viewTable}>
+        <div className={styles.viewHeader}>
+          <span>Alumno</span><span>Monto</span><span>Fecha</span><span>Estado</span>
+        </div>
+        {rows.map(r => (
+          <div key={r.name} className={styles.viewRow}>
+            <span>{r.name}</span>
+            <span>{r.amount}</span>
+            <span>{r.date}</span>
+            <span className={`${styles.viewBadge} ${styles[r.status]}`}>{r.status}</span>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+
+// ── Mockup principal interactivo ───────────────────
+
+const VIEWS = {
+  Dashboard:  { label: 'Dashboard del director',   View: ViewDashboard  },
+  Alumnos:    { label: 'Gestión de alumnos',        View: ViewAlumnos    },
+  Matrícula:  { label: 'Matrícula digital',         View: ViewMatricula  },
+  Notas:      { label: 'Registro de notas',         View: ViewNotas      },
+  Asistencia: { label: 'Control de asistencia',     View: ViewAsistencia },
+  Cobranza:   { label: 'Cobranza y pagos',          View: ViewCobranza   },
+}
+
+function DashboardMockup() {
+  const [active, setActive] = useState('Dashboard')
+  const [paused, setPaused] = useState(false)
+  const keys = Object.keys(VIEWS)
+
+  useEffect(() => {
+    if (paused) return
+    const id = setInterval(() => {
+      setActive(cur => {
+        const idx = keys.indexOf(cur)
+        return keys[(idx + 1) % keys.length]
+      })
+    }, 2800)
+    return () => clearInterval(id)
+  }, [paused])
+
+  const { label, View } = VIEWS[active]
+
+  return (
+    <div
+      className={styles.mockup}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className={styles.mockupBar}>
         <span /><span /><span />
         <div className={styles.mockupUrl}>sistema.nexio.pe</div>
       </div>
       <div className={styles.mockupBody}>
         <div className={styles.mockupSidebar}>
-          {['Dashboard', 'Alumnos', 'Matrícula', 'Notas', 'Asistencia', 'Cobranza'].map(s => (
-            <div key={s} className={styles.mockupSideItem}>{s}</div>
+          {Object.keys(VIEWS).map(key => (
+            <div
+              key={key}
+              className={`${styles.mockupSideItem} ${key === active ? styles.mockupSideItemActive : ''}`}
+              onClick={() => { setActive(key); setPaused(true) }}
+            >
+              {key}
+              {key === active && !paused && (
+                <span className={styles.sideProgress} />
+              )}
+            </div>
           ))}
         </div>
         <div className={styles.mockupMain}>
-          <div className={styles.mockupTitle}>Dashboard del director</div>
-          <div className={styles.mockupCards}>
-            <div className={styles.mockupCard}>
-              <span className={styles.mockupNum}>248</span>
-              <span>Alumnos activos</span>
-            </div>
-            <div className={styles.mockupCard}>
-              <span className={styles.mockupNum} style={{color: '#e55'}}>12</span>
-              <span>Pagos pendientes</span>
-            </div>
-            <div className={styles.mockupCard}>
-              <span className={styles.mockupNum}>94%</span>
-              <span>Asistencia hoy</span>
-            </div>
-          </div>
-          <div className={styles.mockupChartLabel}>Recaudación mensual</div>
-          <div className={styles.mockupChart}>
-            {[60, 80, 55, 90, 75, 95, 70].map((h, i) => (
-              <div key={i} className={styles.mockupBar2} style={{ height: `${h}%` }} />
-            ))}
+          <div className={styles.mockupTitle}>{label}</div>
+          <div className={styles.viewWrap} key={active}>
+            <View />
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
 
 .section {
   padding: $section-padding;
-  background: #0F2E24;
+  background: #080F24;
 
   @media (max-width: $tablet) {
     padding: $section-padding-mobile;
@@ -120,6 +120,16 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  color: inherit;
+  transition: border-color $transition, background $transition, transform $transition;
+
+  &:hover {
+    border-color: $accent;
+    background: rgba($accent, 0.15);
+    transform: translateY(-3px);
+
+    .planCta { opacity: 1; }
+  }
 }
 
 .planHighlight {
@@ -158,6 +168,16 @@
   color: rgba($white, 0.6);
 }
 
+.planCta {
+  margin-top: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: $accent;
+  letter-spacing: 0.03em;
+  opacity: 0;
+  transition: opacity $transition;
+}
+
 // Standalone mockup container
 .visual {
   display: flex;
@@ -169,7 +189,7 @@
     content: '';
     position: absolute;
     inset: -48px;
-    background: radial-gradient(ellipse at center, rgba(#1D9E75, 0.12), transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(#3B82F6, 0.12), transparent 70%);
     z-index: 0;
     pointer-events: none;
   }

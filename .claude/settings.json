@@ -4,7 +4,16 @@
       "Bash(npm install *)",
       "Bash(npm run *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
-      "Bash(npx vite *)"
+      "Bash(npx vite *)",
+      "Bash(Get-ChildItem -Path \"d:\\\\Personal\\\\portafolio\\\\src\\\\components\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -ExpandProperty Name)",
+      "Bash(mv \"d:/Personal/portafolio/src/data/niches.js\" \"d:/Personal/portafolio/src/data/niches.jsx\")",
+      "WebFetch(domain:unsplash.com)",
+      "PowerShell(Copy-Item \"d:\\\\Personal\\\\portafolio\\\\img\\\\nexio-logo-animated.gif\" \"d:\\\\Personal\\\\portafolio\\\\public\\\\img\\\\nexio-logo-animated.gif\")",
+      "Bash(firebase deploy *)"
+    ],
+    "additionalDirectories": [
+      "d:\\Personal\\portafolio\\src\\data"
     ]
   }
 }

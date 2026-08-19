@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "prod": "nexio-portfolio-2026"
+  },
   "targets": {},
   "etags": {}
 }

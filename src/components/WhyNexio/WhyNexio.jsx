@@ -50,9 +50,8 @@ export default function WhyNexio() {
                   <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
                 </svg>
                 <blockquote>
-                  "Recuperé dos moras del primer mes. El sistema se pagó solo antes de terminar la implementación."
+                  Un sistema a medida no es un lujo — es no volver a buscar un dato en tres cuadernos distintos, no depender de un Excel que nadie entiende, y no pagar por funciones que tu colegio jamás va a usar.
                 </blockquote>
-                <cite>— Director de colegio privado, Lima</cite>
               </div>
             </div>
           </div>

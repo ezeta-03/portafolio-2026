@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Nexio — Foto de perfil y portada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #1E3A8A;
+    --accent:  #3B82F6;
+    --dark:    #080F24;
+    --white:   #ffffff;
+    --serif:   'DM Serif Display', serif;
+    --sans:    'DM Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: #C9CDD4;
+    padding: 56px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    min-height: 100vh;
+  }
+
+  .label-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #555;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 100px;
+    padding: 5px 18px;
+  }
+
+  /* ══════════════════════════════════════════
+     FOTO DE PERFIL — 500 × 500 px
+  ══════════════════════════════════════════ */
+  .profile-pic {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(150deg, #010B19 0%, #1E3A8A 55%, #3B82F6 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  /* Anillos decorativos de fondo */
+  .profile-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .profile-ring-1 { width: 380px; height: 380px; }
+  .profile-ring-2 { width: 470px; height: 470px; border-color: rgba(255,255,255,0.04); }
+
+  /* Badge blanco que contiene el favicon */
+  .profile-badge {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    box-shadow:
+      0 0 0 8px rgba(255,255,255,0.08),
+      0 24px 64px rgba(0,0,0,0.22);
+  }
+
+  .profile-favicon {
+    width: 434px;
+    height: auto;
+    display: block;
+  }
+
+  /* Wordmark debajo del badge */
+  .profile-wordmark {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Previews circulares ── */
+  .preview-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 28px;
+    margin-top: 4px;
+  }
+
+  .preview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .preview-circle {
+    border-radius: 50%;
+    background: linear-gradient(150deg, #010B19 0%, #1E3A8A 55%, #3B82F6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .preview-circle.sz-80 { width: 80px; height: 80px; }
+  .preview-circle.sz-48 { width: 48px; height: 48px; }
+  .preview-circle.sz-32 { width: 32px; height: 32px; }
+
+  .preview-inner {
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sz-80 .preview-inner  { width: 54px; height: 54px; }
+  .sz-48 .preview-inner  { width: 33px; height: 33px; }
+  .sz-32 .preview-inner  { width: 22px; height: 22px; }
+
+  .preview-inner img { width: 80%; display: block; }
+
+  .preview-label {
+    font-size: 11px;
+    color: #666;
+  }
+
+  /* ══════════════════════════════════════════
+     PORTADA — 1280 × 720 px  (16:9)
+  ══════════════════════════════════════════ */
+  .cover {
+    width: 1280px;
+    height: 720px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* ── Panel izquierdo oscuro (texto) ── */
+  .cover-left {
+    width: 660px;
+    height: 100%;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 72px;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+  /* Barra lateral verde */
+  .cover-left::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--accent), var(--primary));
+  }
+
+  /* ── Panel izquierdo: contenido Sistema Académico ── */
+  .cover-logo-img {
+    height: 38px;
+    width: auto;
+    max-width: 180px;
+    filter: brightness(0) invert(1);
+    display: block;
+    margin-bottom: 22px;
+    opacity: 0.90;
+    object-fit: contain;
+  }
+
+  .cover-product-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .cover-headline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 50px;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+
+  .cover-sub {
+    font-size: 14.5px;
+    color: rgba(255,255,255,0.58);
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .cover-features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px 20px;
+    margin-bottom: 26px;
+  }
+
+  .cover-features li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.76);
+    font-weight: 500;
+  }
+
+  .cover-features li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .cover-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .cover-price strong {
+    color: var(--white);
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  /* ── Panel derecho: Generador IA ── */
+  .cover-right {
+    flex: 1;
+    background: linear-gradient(150deg, #010B19 0%, #1E3A8A 60%, #2563EB 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 72px 72px 120px;
+    overflow: hidden;
+  }
+
+  .cover-r-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 4px 14px;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+
+  .cover-r-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 44px;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 26px;
+  }
+
+  .cover-r-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 30px;
+  }
+
+  .cover-r-step {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 14.5px;
+    color: rgba(255,255,255,0.80);
+    font-weight: 500;
+  }
+
+  .step-n {
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.14);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cover-r-plans {
+    display: flex;
+    gap: 10px;
+  }
+
+  .cover-r-plan {
+    flex: 1;
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 10px;
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    text-align: center;
+  }
+
+  .cover-r-plan .plan-name {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .cover-r-plan .plan-price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .cover-r-plan .plan-price small {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .cover-r-plan.highlight {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.38);
+  }
+
+  /* Barra inferior de acento */
+  .cover-bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent), rgba(29,158,117,0.2));
+    z-index: 10;
+  }
+
+  /* ── Separador diagonal: nace del borde derecho del panel oscuro ── */
+  .cover-left::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -80px;
+    width: 0;
+    height: 0;
+    border-top: 720px solid var(--dark);
+    border-right: 80px solid transparent;
+    z-index: 2;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════
+     FOTO DE PERFIL
+══════════════════════════ -->
+<div class="label-block">
+  <div class="section-label">Foto de perfil — 500 × 500 px (circular)</div>
+
+  <div class="profile-pic">
+    <div class="profile-ring profile-ring-1"></div>
+    <div class="profile-ring profile-ring-2"></div>
+    <div class="profile-badge">
+      <img src="/img/favicon.png" alt="Nexio" class="profile-favicon" />
+    </div>
+    <div class="profile-wordmark">Nexio</div>
+  </div>
+
+  <div style="font-size:12px;color:#666;">Preview a distintos tamaños</div>
+  <div class="preview-row">
+    <div class="preview-item">
+      <div class="preview-circle sz-80">
+        <div class="preview-inner"><img src="/img/favicon.png" alt="" /></div>
+      </div>
+      <div class="preview-label">80 px</div>
+    </div>
+    <div class="preview-item">
+      <div class="preview-circle sz-48">
+        <div class="preview-inner"><img src="/img/favicon.png" alt="" /></div>
+      </div>
+      <div class="preview-label">48 px</div>
+    </div>
+    <div class="preview-item">
+      <div class="preview-circle sz-32">
+        <div class="preview-inner"><img src="/img/favicon.png" alt="" /></div>
+      </div>
+      <div class="preview-label">32 px</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     PORTADA
+══════════════════════════ -->
+<div class="label-block">
+  <div class="section-label">Portada — 1280 × 720 px (16:9)</div>
+
+  <div class="cover">
+    <div class="cover-bottom-bar"></div>
+
+    <!-- Izquierda: Sistema Académico -->
+    <div class="cover-left">
+      <img src="/img/logo.png" alt="Nexio" class="cover-logo-img" />
+      <span class="cover-product-label">Sistema Académico</span>
+      <div class="cover-headline">Tu colegio,<br/>digitalizado.</div>
+      <p class="cover-sub">Matrículas, pagos, asistencia y notas en un solo sistema hecho a medida.</p>
+      <ul class="cover-features">
+        <li>Matrículas y pensiones</li>
+        <li>Control de asistencia</li>
+        <li>Notas y libretas</li>
+        <li>Comunicados a padres</li>
+      </ul>
+      <div class="cover-price">Desde <strong>S/299</strong> /mes · nexio.pe</div>
+    </div>
+
+    <!-- Derecha: Generador IA -->
+    <div class="cover-right">
+      <span class="cover-r-label">Generador de Sesiones IA</span>
+      <div class="cover-r-title">Tu sesión lista<br/>en 10 minutos.</div>
+      <div class="cover-r-steps">
+        <div class="cover-r-step"><span class="step-n">1</span><span>Ingresa grado, área y tema</span></div>
+        <div class="cover-r-step"><span class="step-n">2</span><span>La IA genera la sesión completa</span></div>
+        <div class="cover-r-step"><span class="step-n">3</span><span>Descarga en PDF o Word listo para firmar</span></div>
+      </div>
+      <div class="cover-r-plans">
+        <div class="cover-r-plan">
+          <span class="plan-name">Básico</span>
+          <span class="plan-price">S/19<small>/mes</small></span>
+        </div>
+        <div class="cover-r-plan highlight">
+          <span class="plan-name">Profesional ★</span>
+          <span class="plan-price">S/29<small>/mes</small></span>
+        </div>
+        <div class="cover-r-plan">
+          <span class="plan-name">Institución</span>
+          <span class="plan-price">S/120<small>/mes</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,14 +1,16 @@
+import { Link } from 'react-router-dom'
 import useScrollReveal from '../../hooks/useScrollReveal'
 import { waLink } from '../../utils/whatsapp'
-import { IconStethoscope, IconUtensils, IconGlobe, IconBriefcase, IconShoppingBag } from '../Icon/Icon'
+import { IconStethoscope, IconUtensils, IconGlobe, IconBriefcase, IconShoppingBag, IconGraduate } from '../Icon/Icon'
 import styles from './Niches.module.scss'
 
 const niches = [
-  { Icon: IconStethoscope, name: 'Clínicas y consultorios' },
-  { Icon: IconUtensils,    name: 'Restaurantes y delivery' },
-  { Icon: IconGlobe,       name: 'Academias de idiomas'   },
-  { Icon: IconBriefcase,   name: 'Servicios profesionales' },
-  { Icon: IconShoppingBag, name: 'Retail y tiendas'       },
+  { Icon: IconGraduate,    name: 'Sistema Académico',         slug: '/sistema-academico' },
+  { Icon: IconStethoscope, name: 'Clínicas y consultorios',   slug: '/clinicas' },
+  { Icon: IconUtensils,    name: 'Restaurantes y delivery',    slug: '/restaurantes' },
+  { Icon: IconGlobe,       name: 'Academias de idiomas',       slug: '/academias' },
+  { Icon: IconBriefcase,   name: 'Servicios profesionales',    slug: '/servicios-profesionales' },
+  { Icon: IconShoppingBag, name: 'Retail y tiendas',           slug: '/retail' },
 ]
 
 export default function Niches() {
@@ -20,13 +22,13 @@ export default function Niches() {
       <div className="container">
         <div className={`fade-in ${styles.header}`} ref={titleRef}>
           <h2 className="section-title section-title--light">
-            También trabajamos con:
+            Sectores que atendemos
           </h2>
         </div>
 
         <div className={styles.grid}>
           {niches.map((n, i) => (
-            <NicheCard key={n.name} Icon={n.Icon} name={n.name} delay={i * 80} />
+            <NicheCard key={n.name} Icon={n.Icon} name={n.name} slug={n.slug} delay={i * 80} />
           ))}
         </div>
 
@@ -47,10 +49,11 @@ export default function Niches() {
   )
 }
 
-function NicheCard({ Icon, name, delay }) {
+function NicheCard({ Icon, name, slug, delay }) {
   const ref = useScrollReveal()
   return (
-    <div
+    <Link
+      to={slug}
       className={`fade-in ${styles.card}`}
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
@@ -58,8 +61,9 @@ function NicheCard({ Icon, name, delay }) {
       <div className={styles.cardBody}>
         <span className={styles.icon}><Icon size={24} /></span>
         <span className={styles.name}>{name}</span>
+        <span className={styles.cardArrow}>→</span>
       </div>
-    </div>
+    </Link>
   )
 }
 

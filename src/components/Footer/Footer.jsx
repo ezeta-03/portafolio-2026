@@ -3,7 +3,7 @@ import styles from './Footer.module.scss'
 const links = [
   { label: 'Soluciones', href: '#soluciones' },
   { label: 'Productos', href: '#productos' },
-  { label: 'Nichos', href: '#nichos' },
+  { label: 'Sectores', href: '#nichos' },
   { label: 'Contacto', href: '#contacto' },
 ]
 

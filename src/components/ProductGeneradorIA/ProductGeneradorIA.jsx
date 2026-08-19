@@ -3,6 +3,8 @@ import useScrollReveal from '../../hooks/useScrollReveal'
 import { waLink } from '../../utils/whatsapp'
 import styles from './ProductGeneradorIA.module.scss'
 
+
+
 const includes = [
   'Competencias y capacidades del área',
   'Desempeños esperados por grado',
@@ -13,9 +15,21 @@ const includes = [
 ]
 
 const plans = [
-  { name: 'Básico', price: 'S/19', period: '/mes', desc: '5 sesiones al mes' },
-  { name: 'Profesional', price: 'S/29', period: '/mes', desc: 'Sesiones ilimitadas', highlight: true },
-  { name: 'Institución', price: 'S/120', period: '/mes', desc: 'Hasta 10 docentes' },
+  {
+    name: 'Básico',
+    price: 'S/19', period: '/mes', desc: '5 sesiones al mes',
+    waMsg: 'Hola, me interesa el plan Básico del generador IA de Nexio (S/19/mes · 5 sesiones). ¿Cómo empiezo?',
+  },
+  {
+    name: 'Profesional',
+    price: 'S/29', period: '/mes', desc: 'Sesiones ilimitadas', highlight: true,
+    waMsg: 'Hola, me interesa el plan Profesional del generador IA de Nexio (S/29/mes · sesiones ilimitadas). ¿Cómo empiezo?',
+  },
+  {
+    name: 'Institución',
+    price: 'S/120', period: '/mes', desc: 'Hasta 10 docentes',
+    waMsg: 'Hola, me interesa el plan Institución del generador IA de Nexio (S/120/mes · hasta 10 docentes). ¿Podemos conversar?',
+  },
 ]
 
 export default function ProductGeneradorIA() {
@@ -63,14 +77,21 @@ export default function ProductGeneradorIA() {
 
             <div className={styles.plans}>
               {plans.map(p => (
-                <div key={p.name} className={`${styles.plan} ${p.highlight ? styles.planHighlight : ''}`}>
+                <a
+                  key={p.name}
+                  href={waLink(p.waMsg)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.plan} ${p.highlight ? styles.planHighlight : ''}`}
+                >
                   <span className={styles.planName}>{p.name}</span>
                   <div className={styles.planPrice}>
                     <strong>{p.price}</strong>
                     <span>{p.period}</span>
                   </div>
                   <span className={styles.planDesc}>{p.desc}</span>
-                </div>
+                  <span className={styles.planCta}>Contratar →</span>
+                </a>
               ))}
             </div>
 

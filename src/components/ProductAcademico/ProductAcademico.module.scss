@@ -177,16 +177,40 @@
 }
 
 .mockupSideItem {
+  position: relative;
+  overflow: hidden;
   padding: 7px 8px;
-  color: rgba($white, 0.6);
-  border-radius: 4px;
+  color: rgba($white, 0.55);
+  border-radius: 3px;
   font-size: 0.7rem;
-  cursor: default;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
 
-  &:first-child {
-    background: rgba($accent, 0.3);
-    color: $white;
+  &:hover {
+    color: rgba($white, 0.85);
+    background: rgba($white, 0.06);
   }
+}
+
+.sideProgress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: $accent;
+  animation: sideProgressSweep 2.8s linear forwards;
+}
+
+@keyframes sideProgressSweep {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+.mockupSideItemActive {
+  background: rgba($accent, 0.25);
+  color: $white;
+  font-weight: 600;
 }
 
 .mockupMain {
@@ -204,9 +228,9 @@
 
 .mockupCards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .mockupCard {
@@ -247,6 +271,11 @@
   to   { transform: scaleY(1); }
 }
 
+@keyframes viewFade {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .mockupBar2 {
   flex: 1;
   background: linear-gradient(to top, $primary, $accent);
@@ -256,7 +285,7 @@
   animation: barGrow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-play-state: paused;
 
-  &:nth-child(1) { animation-delay: 0.0s; }
+  &:nth-child(1) { animation-delay: 0.00s; }
   &:nth-child(2) { animation-delay: 0.08s; }
   &:nth-child(3) { animation-delay: 0.16s; }
   &:nth-child(4) { animation-delay: 0.24s; }
@@ -267,4 +296,163 @@
 
 :global(.scale-in.visible) .mockupBar2 {
   animation-play-state: running;
+}
+
+// Barras que siempre animan (vistas interactivas)
+.mockupBarAnim {
+  flex: 1;
+  background: linear-gradient(to top, $primary, $accent);
+  border-radius: 3px 3px 0 0;
+  opacity: 0.85;
+  transform-origin: bottom;
+  animation: barGrow 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: running;
+
+  &:nth-child(1) { animation-delay: 0.00s; }
+  &:nth-child(2) { animation-delay: 0.07s; }
+  &:nth-child(3) { animation-delay: 0.14s; }
+  &:nth-child(4) { animation-delay: 0.21s; }
+  &:nth-child(5) { animation-delay: 0.28s; }
+  &:nth-child(6) { animation-delay: 0.35s; }
+  &:nth-child(7) { animation-delay: 0.42s; }
+}
+
+// Contenedor de vista con fade al cambiar
+.viewWrap {
+  animation: viewFade 0.22s ease both;
+}
+
+// Buscador simulado
+.viewSearch {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: $bg-light;
+  border: 1px solid $gray-soft;
+  border-radius: 3px;
+  padding: 5px 8px;
+  font-size: 0.68rem;
+  color: $gray-text;
+  margin-bottom: 10px;
+}
+
+// Tabla genérica
+.viewTable {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.viewHeader {
+  display: grid;
+  grid-template-columns: 1.6fr 0.8fr 0.8fr;
+  padding: 4px 6px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $gray-text;
+  border-bottom: 1px solid $gray-soft;
+  margin-bottom: 2px;
+}
+
+.viewHeaderNotas {
+  grid-template-columns: 1.5fr 0.5fr 0.5fr 0.5fr 0.6fr;
+}
+
+.viewRow {
+  display: grid;
+  grid-template-columns: 1.6fr 0.8fr 0.8fr;
+  padding: 5px 6px;
+  font-size: 0.68rem;
+  color: $text-dark;
+  border-bottom: 1px solid rgba($gray-soft, 0.6);
+  align-items: center;
+
+  &:last-child { border-bottom: none; }
+}
+
+.viewRowNotas {
+  grid-template-columns: 1.5fr 0.5fr 0.5fr 0.5fr 0.6fr;
+}
+
+// Badges de estado
+.viewBadge {
+  display: inline-block;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  &.activo  { background: rgba($accent, 0.14); color: $primary; }
+  &.deuda   { background: rgba(#e05252, 0.14); color: #b83232; }
+  &.inactivo{ background: rgba($gray-text, 0.14); color: $gray-text; }
+  &.pagado  { background: rgba($accent, 0.14); color: $primary; }
+  &.parcial { background: rgba(#d97706, 0.14); color: #b45309; }
+}
+
+// Barras de progreso — Matrícula
+.viewGrades {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.viewGradeRow {
+  display: grid;
+  grid-template-columns: 80px 1fr 36px;
+  align-items: center;
+  gap: 8px;
+}
+
+.viewGradeName {
+  font-size: 0.65rem;
+  color: $text-dark;
+  font-weight: 500;
+}
+
+.viewGradeCount {
+  font-size: 0.62rem;
+  color: $gray-text;
+  text-align: right;
+}
+
+.viewPbarBg {
+  height: 5px;
+  background: $gray-soft;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.viewPbarFill {
+  height: 100%;
+  background: linear-gradient(to right, $primary, $accent);
+  border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+// Barras de asistencia con etiqueta de día
+.viewDayBars {
+  display: flex;
+  gap: 6px;
+  height: 68px;
+  align-items: flex-end;
+}
+
+.viewDayCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.viewDayLabel {
+  font-size: 0.58rem;
+  color: $gray-text;
+  flex-shrink: 0;
 }

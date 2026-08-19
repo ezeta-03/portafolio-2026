@@ -30,9 +30,10 @@
   border-radius: $radius-md;
   overflow: hidden;
   transition: border-color $transition, transform $transition, box-shadow $transition, background $transition;
-  cursor: default;
+  cursor: pointer;
   min-width: 150px;
   flex: 1;
+  text-decoration: none;
 
   &:hover {
     border-color: rgba($accent, 0.5);
@@ -68,6 +69,17 @@
   font-size: 0.9rem;
   color: $white;
   line-height: 1.35;
+}
+
+.cardArrow {
+  font-size: 1rem;
+  color: rgba($white, 0.25);
+  transition: color $transition, transform $transition;
+
+  .card:hover & {
+    color: $accent;
+    transform: translateX(4px);
+  }
 }
 
 .closing {

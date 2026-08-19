@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { waLink } from '../../utils/whatsapp'
+import { scrollTo } from '../../utils/scroll'
 import styles from './Navbar.module.scss'
 
 const links = [
-  { label: 'Soluciones', href: '#soluciones' },
-  { label: 'Productos', href: '#productos' },
-  { label: 'Nichos', href: '#nichos' },
+  { label: 'Plataforma', href: '#soluciones' },
+  { label: 'Módulos', href: '#productos' },
+  { label: 'Sectores', href: '#nichos' },
   { label: 'Contacto', href: '#contacto' },
 ]
 
@@ -24,13 +25,22 @@ export default function Navbar() {
   return (
     <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.inner}`}>
-        <a href="#" className={styles.logo}>
+        <a
+          href="/"
+          className={styles.logo}
+          onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+        >
           <img src="/img/logo.png" alt="Nexio" className={styles.logoImg} />
         </a>
 
         <nav className={`${styles.nav} ${open ? styles.open : ''}`}>
           {links.map(l => (
-            <a key={l.href} href={l.href} className={styles.link} onClick={() => setOpen(false)}>
+            <a
+              key={l.href}
+              href={l.href}
+              className={styles.link}
+              onClick={e => { e.preventDefault(); scrollTo(l.href.slice(1)); setOpen(false) }}
+            >
               {l.label}
             </a>
           ))}

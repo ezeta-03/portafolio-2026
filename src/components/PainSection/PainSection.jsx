@@ -50,16 +50,16 @@ export default function PainSection() {
       {/* Bloque cinematográfico "el antes" */}
       <div className={`fade-in ${styles.cinematic}`} ref={introRef}>
         <img
-          src="/img/sesiones_de_clase.webp"
-          alt="Docente documentando a mano — el problema que Nexio resuelve"
+          src="https://images.unsplash.com/photo-1771758249853-415175dc29b9?w=1280&q=80&auto=format&fit=crop"
+          alt="Caos de papeles y documentos — la realidad sin un sistema de gestión"
           className={styles.cinematicImg}
           loading="eager"
         />
         <div className={styles.cinematicOverlay}>
           <div className={styles.cinematicText}>
             <span className={styles.cinematicBadge}>El escenario más común en colegios de Perú</span>
-            <h3>Una secretaria. Tres cuadernos. Cinco hojas de Excel. WhatsApp para todo.</h3>
-            <p>Si esto se parece a tu colegio, sigue leyendo.</p>
+            <h3>Datos que se pierden. Cobros sin control. Decisiones tomadas de memoria. Así no se dirige un colegio — así se sobrevive.</h3>
+            <p>¿Cuánto tiempo más puede funcionar así tu institución?</p>
           </div>
         </div>
       </div>

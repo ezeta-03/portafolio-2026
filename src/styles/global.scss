@@ -57,13 +57,14 @@ h1, h2, h3, h4 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 28px;
-  border-radius: $radius-sm;
+  padding: 13px 28px;
+  border-radius: 2px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
   transition: all $transition;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1.5px solid transparent;
   white-space: nowrap;
 
   &--primary {
@@ -71,20 +72,19 @@ h1, h2, h3, h4 {
     color: $white;
 
     &:hover {
-      background: $primary;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba($accent, 0.35);
+      background: color.adjust($accent, $lightness: -8%);
+      box-shadow: 0 4px 20px rgba($accent, 0.32);
     }
   }
 
   &--secondary {
     background: transparent;
     color: $white;
-    border-color: rgba($white, 0.5);
+    border-color: rgba($white, 0.38);
 
     &:hover {
-      border-color: $white;
-      background: rgba($white, 0.08);
+      border-color: rgba($white, 0.75);
+      background: rgba($white, 0.06);
     }
   }
 
@@ -94,8 +94,7 @@ h1, h2, h3, h4 {
 
     &:hover {
       background: color.adjust($whatsapp, $lightness: -8%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba($whatsapp, 0.4);
+      box-shadow: 0 4px 20px rgba($whatsapp, 0.35);
     }
   }
 
